@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  width: 100%
+}
+
+.btn {
+  margin: .125rem;
+  width: 30%;
+  max-width: 8rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.btnPanTilt {
+  
+}

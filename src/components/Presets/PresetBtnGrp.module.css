@@ -1,0 +1,6 @@
+.btnGrp {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 28rem;
+}
