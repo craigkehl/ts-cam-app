@@ -1,23 +1,22 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment } from 'react';
 
-import { zoom } from '../../util/http-requests'
-
-import classes from './Slider.module.css'
+import { zoom } from '../../util/http-requests';
+import classes from './Slider.module.css';
 
 const Slider: React.FC = () => {
-  const [curValue, setCurValue] = useState(0)
+  const [ curValue, setCurValue ] = useState(0);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCurValue(parseInt(event.target.value))
-    zoom(event.target.value)
-  }
+    setCurValue(parseInt(event.target.value));
+    zoom(parseInt(event.target.value));
+  };
 
   const changeCompleteHandler = () => {
-    setCurValue(0)
-    zoom(0x00)
-    console.log('Change Complete')
-    console.log(curValue)
-  }
+    setCurValue(0);
+    zoom(0x00);
+    console.log('Change Complete');
+    console.log(curValue);
+  };
 
   return (
     <Fragment>
@@ -37,7 +36,7 @@ const Slider: React.FC = () => {
         onMouseUp={changeCompleteHandler}
       />
     </Fragment>
-  )
-}
+  );
+};
 
-export default Slider
+export default Slider;

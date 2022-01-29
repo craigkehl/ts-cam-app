@@ -1,9 +1,9 @@
-import React from "react"
-import Button from "../UI/Button"
-import Card from "../UI/Card"
-import { recallPreset } from "../../util/http-requests"
+import React from "react";
+import Button from "../UI/Button";
+import Card from "../UI/Card";
+import { recallPreset } from "../../util/http-requests";
 
-import classes from "./PresetBtnGrp.module.css"
+import classes from "./PresetBtnGrp.module.css";
 
 const presetArray = [
   "All Stage",
@@ -21,17 +21,14 @@ const presetArray = [
   "Right Wide",
   "Left Low",
   "Right Low",
-]
-
-const hiddenPresets: string[] = []
-
+];
 
 const PresetBtnGrp: React.FC<{}> = (props) => {
 
   const recallPresetHandler: (key: number) => void = (key) => {
-    recallPreset(key)
-  }
-  
+    recallPreset(key.toString());
+  };
+
   const presetList = (
     presetArray.length > 0 ? (
       presetArray.map((name, index) => (
@@ -45,13 +42,13 @@ const PresetBtnGrp: React.FC<{}> = (props) => {
     ) : (
       <p>No presets found.</p>
     )
-  )
-  
+  );
+
   return (
     <Card className={classes.card}>
       <div className={classes.btnGrp}>{presetList}</div>
     </Card>
-  )
-}
+  );
+};
 
-export default PresetBtnGrp
+export default PresetBtnGrp;
