@@ -1,57 +1,58 @@
-const BASEURL: string = 'http://192.168.108.2:4000'
+// const BASEURL: string = 'http://192.168.108.2:4000';
+const BASEURL: string = 'http://localhost:4000';
 
 export const recallPreset = async (presetId: string) => {
   // console.log(`${BASEURL}/preset/${presetId}`)
   try {
-    const response = await fetch(`${BASEURL}/preset/${presetId}`)
+    const response = await fetch(`${BASEURL}/preset/${presetId}`);
     if (!response.ok) {
-      throw new Error('Preset not executed!')
+      throw new Error('Preset not executed!');
     } else {
-      return true
+      return true;
     }
   } catch (error) {
-    console.log('Error: ' + error.message)
+    console.log('Error: ' + error);
   }
-}
+};
 
-export const zoom = async (speed: string) => {
-  console.log(`${BASEURL}/zoom/${speed}`)
+export const zoom = async (speed: number) => {
+  console.log(`${BASEURL}/zoom/${speed.toString()}`);
   try {
-    const response = await fetch(`${BASEURL}/zoom/${speed}`)
+    const response = await fetch(`${BASEURL}/zoom/${speed}`);
     if (!response.ok) {
-      throw new Error('Zoom not executed!')
+      throw new Error('Zoom not executed!');
     } else {
-      return true
+      return true;
     }
   } catch (error) {
-    console.log('Error: ' + error.message)
+    console.log('Error: ' + error);
   }
-}
+};
 
 export const move = async (pan: string, tilt: string) => {
-  console.log(`${BASEURL}/move/pan=${pan}&tilt=${tilt}`)
+  console.log(`${BASEURL}/move/pan=${pan}&tilt=${tilt}`);
   try {
-    const response = await fetch(`${BASEURL}/move/?pan=${pan}&tilt=${tilt}`)
+    const response = await fetch(`${BASEURL}/move/?pan=${pan}&tilt=${tilt}`);
     if (!response.ok) {
-      throw new Error('Move not executed!')
+      throw new Error('Move not executed!');
     } else {
-      return true
+      return true;
     }
   } catch (error) {
-    console.log('Error: ' + error.message)
+    console.log('Error: ' + error);
   }
-}
+};
 
 export const recallScenes = async (scene: string) => {
-  console.log(`${BASEURL}/scene/${scene}`)
+  console.log(`${BASEURL}/scene/${scene}`);
   try {
-    const response = await fetch(`${BASEURL}/scene/${scene}`)
+    const response = await fetch(`${BASEURL}/scene/${scene}`);
     if (!response.ok) {
-      throw new Error('scene not executed!')
+      throw new Error('scene not executed!');
     } else {
-      return true
+      return true;
     }
   } catch (error) {
-    console.log('Error: ' + error.message)
+    console.log('Error: ' + error);
   }
-}
+};
