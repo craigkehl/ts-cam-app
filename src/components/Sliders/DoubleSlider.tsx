@@ -1,48 +1,59 @@
-import React, { useEffect, useCallback, useState } from 'react'
-import { move } from '../../util/http-requests'
-import classes from './DoubleSlider.module.css'
+import React, { useEffect, useCallback, useState } from 'react';
+import { move } from '../../util/http-requests';
+import classes from './DoubleSlider.module.css';
 
-const DoubleSlider: React.FC<{xMax: string, yMax: string}> = (props) => {
-  const [rate, setRate] = useState({
-    x: 0,
-    y: 0,
-    xMax: parseInt(props.xMax),
-    yMax: parseInt(props.yMax),
-  })
+const DoubleSlider: React.FC<{ xMax: string, yMax: string; resolution?: string; }> = (props) => {
+  const [ rate, setRate ] = useState(() => {
+    const resolution = (props.resolution) ? parseInt(props.resolution) : .5;
+    const xMax = parseInt(props.xMax) * resolution;
+    const yMax = parseInt(props.yMax) * resolution;
+    return {
+      x: 0,
+      y: 0,
+      xMax,
+      yMax,
+      resolution: resolution
+    };
+  });
 
   const touchHandler = useCallback((e) => {
-    e.preventDefault()
+    e.preventDefault();
+
+    // calculate touch input relative to target's center dimensions
     if (e.touches) {
       const inputX = Math.floor(
-        e.touches[0].pageX -
-          e.currentTarget.offsetLeft -
-          e.currentTarget.offsetWidth / 2
-      )
+        e.touches[ 0 ].pageX -
+        e.currentTarget.offsetLeft -
+        (e.currentTarget.offsetWidth / 2)
+      );
       const inputY = Math.floor(
-        e.touches[0].pageY -
-          e.currentTarget.offsetTop -
-          e.currentTarget.offsetHeight / 2
-      )
+        e.touches[ 0 ].pageY -
+        e.currentTarget.offsetTop -
+        e.currentTarget.offsetHeight / 2
+      );
 
       setRate((rate) => {
-        const xDivSize = e.currentTarget.offsetWidth / (rate.xMax * 2)
-        const yDivSize = e.currentTarget.offsetHeight / (rate.yMax * 2)
+        // Get each rate steps size
+        const xDivSize = (e.currentTarget.offsetWidth / 2) / (rate.xMax);
+        const yDivSize = (e.currentTarget.offsetHeight / 2) / (rate.yMax);
 
-        const xRate = Math.floor(inputX / xDivSize) * -1
+        // Calc rate
+        const xRate = Math.floor(inputX / xDivSize);
         const xRateChecked =
           xRate > rate.xMax
             ? rate.xMax
             : xRate < rate.xMax * -1
-            ? rate.xMax * -1
-            : xRate
+              ? rate.xMax * -1
+              : xRate;
 
-        const yRate = Math.floor(inputY / yDivSize) * -1
+        // Limit rate to max, add negative to lower & left rate
+        const yRate = Math.floor(inputY / yDivSize * -1);
         const yRateChecked =
           yRate > rate.yMax
             ? rate.yMax
             : yRate < rate.yMax * -1
-            ? rate.yMax * -1
-            : yRate
+              ? rate.yMax * -1
+              : yRate;
 
         if (rate.x !== xRateChecked || rate.y !== yRateChecked) {
           return {
@@ -50,12 +61,13 @@ const DoubleSlider: React.FC<{xMax: string, yMax: string}> = (props) => {
             y: yRateChecked,
             xMax: rate.xMax,
             yMax: rate.yMax,
-          }
+            resolution: rate.resolution
+          };
         }
-        return rate
-      })
+        return rate;
+      });
     }
-  }, [])
+  }, []);
 
   const touchEndHandler = useCallback(() => {
     setRate((rate) => {
@@ -63,28 +75,31 @@ const DoubleSlider: React.FC<{xMax: string, yMax: string}> = (props) => {
         ...rate,
         x: 0,
         y: 0,
-      }
-    })
-  }, [])
+      };
+    });
+  }, []);
 
   useEffect(() => {
-    move(rate.x, rate.y)
-  }, [rate])
+    move(
+      Math.floor(rate.x / rate.resolution).toString(),
+      Math.floor(rate.y / rate.resolution).toString()
+    );
+  }, [ rate ]);
 
   useEffect(() => {
-    const elem = document.getElementById('dblSlider')!
-    elem.addEventListener('touchstart', touchHandler, false)
-    elem.addEventListener('touchmove', touchHandler, false)
-    elem.addEventListener('touchend', touchEndHandler, false)
+    const elem = document.getElementById('dblSlider')!;
+    elem.addEventListener('touchstart', touchHandler, false);
+    elem.addEventListener('touchmove', touchHandler, false);
+    elem.addEventListener('touchend', touchEndHandler, false);
 
     return () => {
-      elem.removeEventListener('touchstart', touchHandler)
-      elem.removeEventListener('touchmove', touchHandler)
-      elem.removeEventListener('touchend', touchEndHandler)
-    }
-  }, [touchEndHandler, touchHandler])
+      elem.removeEventListener('touchstart', touchHandler);
+      elem.removeEventListener('touchmove', touchHandler);
+      elem.removeEventListener('touchend', touchEndHandler);
+    };
+  }, [ touchEndHandler, touchHandler ]);
 
-  return <div id='dblSlider' className={classes.dblSlider} />
-}
+  return <div id='dblSlider' className={classes.dblSlider} />;
+};
 
-export default DoubleSlider
+export default DoubleSlider;
