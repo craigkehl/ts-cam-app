@@ -47,7 +47,7 @@ const DoubleSlider: React.FC<{ className: string; xMax: string; yMax: string; re
               : xRate;
 
         // Limit rate to max, add negative to lower & left rate
-        const yRate = Math.floor(inputY / yDivSize * -1);
+        const yRate = Math.floor(inputY / yDivSize);
         const yRateChecked =
           yRate > rate.yMax
             ? rate.yMax
