@@ -3,7 +3,7 @@ import React, { useState, Fragment } from 'react';
 import { zoom } from '../../util/http-requests';
 import classes from './Slider.module.css';
 
-const Slider: React.FC = () => {
+const Slider: React.FC<{ className: string; }> = (props) => {
   const [ curValue, setCurValue ] = useState(0);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,8 +20,8 @@ const Slider: React.FC = () => {
 
   return (
     <Fragment>
-      <label className={classes.title} htmlFor='zoomSlider'>
-        Zoom {curValue.toString()}
+      <label className={`${classes.title} ${props.className}`} htmlFor='zoomSlider'>
+        Zoom - {curValue.toString()}
       </label>
       <input
         className={classes.slider}

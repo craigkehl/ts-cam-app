@@ -18,9 +18,9 @@ const presetArray = [
   "Organ",
   "Left Stage",
   "Right Stage",
-  "Right Wide",
-  "Left Low",
-  "Right Low",
+  // "Right Wide",
+  // "Left Low",
+  // "Right Low",
 ];
 
 const PresetBtnGrp: React.FC<{}> = (props) => {

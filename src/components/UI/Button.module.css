@@ -1,11 +1,11 @@
 .button {
   position: relative;
-  width: 30%;
-  flex: 1 1 30%;
+  /* width: 30%; */
+  flex: 1 1 27%;
   font: inherit;
   text-align: center;
-  padding: .25rem 0;
-  margin: .125rem;
+  padding: .25rem 3px;
+  margin: .25rem;
   border: 1px solid #8b005d;
   color: white;
   background: #8b005d;
@@ -17,7 +17,7 @@
 .button::before {
   content: "";
   float: left;
-  padding-top: 50%;
+  padding-top: 45%;
 }
 
 .button:focus {
@@ -26,9 +26,11 @@
 
 .button:hover,
 .button:active {
-  background: #ac0e77;
-  border-color: #ac0e77;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
+  background: #9fd3ed;
+  color: #022d43;
+  font-weight: bold;
+  border-color: #022d43;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
 }
 
 @media (min-width: 768px) {

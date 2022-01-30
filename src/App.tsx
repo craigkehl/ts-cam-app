@@ -15,8 +15,8 @@ const App: React.FC<{ className: string; }> = (props) => {
       </Card>
       <PresetBtnGrp />
       <Card className={`${classes} ${props.className}`}>
-        <Slider />
-        <DoubleSlider xMax='24' yMax='20' />
+        <Slider className={`${classes} ${props.className}`} />
+        <DoubleSlider className={`${classes} ${props.className}`} xMax='24' yMax='20' />
       </Card>
     </Fragment>
   );

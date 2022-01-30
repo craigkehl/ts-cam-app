@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { move } from '../../util/http-requests';
 import classes from './DoubleSlider.module.css';
 
-const DoubleSlider: React.FC<{ xMax: string, yMax: string; resolution?: string; }> = (props) => {
+const DoubleSlider: React.FC<{ className: string; xMax: string; yMax: string; resolution?: string; }> = (props) => {
   const [ rate, setRate ] = useState(() => {
     const resolution = (props.resolution) ? parseInt(props.resolution) : .5;
     const xMax = parseInt(props.xMax) * resolution;
