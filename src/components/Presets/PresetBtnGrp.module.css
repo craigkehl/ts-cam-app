@@ -3,4 +3,5 @@
   flex-wrap: wrap;
   justify-content: space-between;
   max-width: 28rem;
+  margin: 0 auto;
 }
