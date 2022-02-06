@@ -1,23 +1,16 @@
 import React, { Fragment } from 'react';
-import SceneBtns from './components/Scenes/SceneBtns';
-import DoubleSlider from './components/Sliders/DoubleSlider';
-import PresetBtnGrp from './components/Presets/PresetBtnGrp';
-import Slider from './components/Sliders/Slider';
-import Card from './components/UI/Card';
+import { Route, Routes } from 'react-router-dom';
 
-import classes from './App.module.css';
+import Controller from "./pages/Controller";
 
-const App: React.FC<{ className: string; }> = (props) => {
+const App: React.FC<{ className?: string; }> = (props) => {
   return (
     <Fragment>
-      <Card className={`${classes} ${props.className}`}>
-        <SceneBtns />
-      </Card>
-      <PresetBtnGrp />
-      <Card className={`${classes} ${props.className}`}>
-        <Slider className={`${classes} ${props.className}`} />
-        <DoubleSlider className={`${classes} ${props.className}`} xMax='24' yMax='20' />
-      </Card>
+      <main>
+        <Routes>
+          <Route path='/controller' element={<Controller />} />
+        </Routes>
+      </main>
     </Fragment>
   );
 };
