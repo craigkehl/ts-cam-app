@@ -1,5 +1,5 @@
 const Welcome = () => {
-  return <h1>Camera Controller</h1>;
+  return <h1>Newcastle Building</h1>;
 };
 
 export default Welcome;
