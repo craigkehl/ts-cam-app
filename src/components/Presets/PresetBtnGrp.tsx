@@ -1,52 +1,32 @@
-import React from "react";
-import Button from "../UI/Button";
-import Card from "../UI/Card";
-import { recallPreset } from "../../util/http-requests";
+import React from 'react';
+import Card from '../UI/Card';
 
-import classes from "./PresetBtnGrp.module.css";
-
-const presetArray = [
-  "All Stage",
-  "Low Podium",
-  "Med Podium",
-  "Wide Podium",
-  "Very Wide",
-  "Center Stage",
-  "Audience",
-  "Conductor",
-  "Piano",
-  "Organ",
-  "Left Stage",
-  "Right Stage",
-  // "Right Wide",
-  // "Left Low",
-  // "Right Low",
-];
+import { useStore } from '../../store/store';
+import Preset from './Preset';
+import classes from './PresetBtnGrp.module.css';
 
 const PresetBtnGrp: React.FC<{}> = (props) => {
+  const obj = useStore()[0];
 
-  const recallPresetHandler: (key: number) => void = (key) => {
-    recallPreset(key.toString());
-  };
-
-  const presetList = (
-    presetArray.length > 0 ? (
-      presetArray.map((name, index) => (
-        <Button
-          className={classes.btn}
-          key={index}
-          onClick={() => recallPresetHandler(index)}>
-          {name}
-        </Button>
-      ))
-    ) : (
-      <p>No presets found.</p>
-    )
-  );
+  // const presetList = (
+  //   (presets.length > 0) ? (
+  //     presets.map((name, index) => (
+  //       <Preset
+  //         className={classes.btn}
+  //         key={index}
+  //         name={name}
+  //         >
+  //         {name}
+  //       </Preset>
+  //     ))
+  //   ) : (
+  //     <p>No presets found.</p>
+  //   )
+  // );
 
   return (
     <Card className={classes.card}>
-      <div className={classes.btnGrp}>{presetList}</div>
+      <div className={classes.btnGrp}>{/* {presetList} */}</div>
     </Card>
   );
 };
