@@ -1,31 +1,39 @@
-import { initStore, GlobalState, Actions } from './store';
+import { initStore } from './store';
 
-interface ToggleShowAction extends Actions {
-  TOGGLE_SHOW: (curState: GlobalState, presetId: number) => any;
+export interface GlobalState {
+  [x: string]: any | undefined;
 }
 
-interface PresetState {
+export interface PresetState {
+  isCurrent: boolean;
   id: number;
   name: string;
   isShow: boolean;
-  isCurrent: boolean;
 }
 
 const configureStore = () => {
-  const actions: ToggleShowAction = {
-    TOGGLE_SHOW: (curState, presetId) => {
-      if (curState.presets) {
-        const presetIndex: number = curState.presets.findIndex(
-          (p: PresetState) => p.id === presetId
-        );
-        const newShowStatus = !curState.presets[presetIndex].isShow;
-        const updatedPresets = [...curState.presets];
-        updatedPresets[presetIndex] = {
-          ...curState.presets[presetIndex],
-          isShow: newShowStatus,
-        };
-        return { presets: updatedPresets };
-      }
+  const actions = {
+    TOGGLE_SHOW: (curState: GlobalState, presetId: number) => {
+      const presetIndex: number = curState.presets.findIndex(
+        (p: PresetState) => p.id === presetId
+      );
+      const newShowStatus = !curState.presets[presetIndex].isShow;
+      const updatedPresets = [...curState.presets];
+      updatedPresets[presetIndex] = {
+        ...curState.presets[presetIndex],
+        isShow: newShowStatus,
+      };
+      return { presets: updatedPresets };
+    },
+    CURRENT_PRESET: (curState: GlobalState, presetId: number) => {
+      const updatedPresets = curState.presets.map(
+        (p: PresetState): PresetState => {
+          p.isCurrent = presetId === p.id ? true : false;
+          console.log(p);
+          return p;
+        }
+      );
+      return { presets: updatedPresets };
     },
   };
 

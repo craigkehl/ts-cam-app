@@ -4,8 +4,8 @@
   flex: 1 1 27%;
   font: inherit;
   text-align: center;
-  padding: .25rem 3px;
-  margin: .25rem;
+  padding: 0.25rem 3px;
+  margin: 0.25rem;
   border: 1px solid #8b005d;
   color: white;
   background: #8b005d;
@@ -15,7 +15,7 @@
 }
 
 .button::before {
-  content: "";
+  content: '';
   float: left;
   padding-top: 45%;
 }
