@@ -12,7 +12,7 @@ const Controller: React.FC<{ className?: string }> = (props) => {
       <Card className={`${classes} ${props.className}`}>
         <SceneBtns />
       </Card>
-      <PresetBtnGrp />
+      <PresetBtnGrp action='recallPreset' />
       <Card className={`${classes} ${props.className}`}>
         <Slider className={`${classes} ${props.className}`} />
         <DoubleSlider

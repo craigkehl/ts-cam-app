@@ -6,7 +6,6 @@ export interface GlobalState {
 export interface Dispatch {
   (actionIdentifier: string, payload: any): void;
 }
-
 interface Action {
   [x: string]: (globalState: GlobalState, payload: any) => GlobalState;
 }

@@ -1,7 +1,5 @@
 .button {
   position: relative;
-  /* width: 30%; */
-  flex: 1 1 27%;
   font: inherit;
   text-align: center;
   padding: 0.25rem 3px;

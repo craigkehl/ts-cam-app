@@ -1,12 +1,18 @@
 import React from 'react';
-// import Button from '../../components/UI/Button'
+import PresetBtnGrp from '../../components/Presets/PresetBtnGrp';
 
-// import { useStore } from '../../store/store'
-
-const ConfigController: React.FC = (): JSX.Element => {
-  // const [presets, dispatch] = useStore(false);
-
-  return <h1>Configure Presets</h1>;
+const ConfigController: React.FC<{ className?: string }> = (props) => {
+  return (
+    <>
+      <h1>Configure Presets</h1>
+      <h2 className='inline'>Visible</h2>
+      <h4 className='inline'>Click a preset to hide it</h4>
+      <PresetBtnGrp action='toggleShow' />
+      <h2 className='inline'>Hidden</h2>
+      <h4 className='inline'>Click a preset to restore it</h4>
+      <PresetBtnGrp action='toggleShow' list='showHidden' />
+    </>
+  );
 };
 
 export default ConfigController;

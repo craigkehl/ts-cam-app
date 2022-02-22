@@ -16,8 +16,6 @@ const Preset = React.memo((props: PresetProps) => {
   // const dispatch = useStore(false)[1];
 
   const recallPresetHandler = (id: number) => {
-    // recallPreset(id.toString());
-    // dispatch('CURRENT_PRESET', props.id);
     props.onRecallPreset(id);
   };
 
