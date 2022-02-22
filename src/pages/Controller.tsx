@@ -4,9 +4,12 @@ import PresetBtnGrp from '../components/Presets/PresetBtnGrp';
 import Slider from '../components/Sliders/Slider';
 import Card from '../components/UI/Card';
 
+import { useStore } from '../store/store';
 import classes from './Controller.module.css';
 
-const Controller: React.FC<{ className?: string }> = (props) => {
+const Controller: React.FC<{ className?: string; }> = (props) => {
+  const globalState = useStore()[ 0 ];
+  console.log(globalState);
   return (
     <>
       <Card className={`${classes} ${props.className}`}>
@@ -19,6 +22,7 @@ const Controller: React.FC<{ className?: string }> = (props) => {
           className={`${classes} ${props.className}`}
           xMax='24'
           yMax='20'
+          resolution={globalState.ptzSettings.resolution}
         />
       </Card>
     </>

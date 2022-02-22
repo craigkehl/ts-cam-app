@@ -1,8 +1,6 @@
 import { initStore } from './store';
 
-export interface GlobalState {
-  [x: string]: any | undefined;
-}
+import { GlobalState } from './store';
 
 export interface PresetState {
   isCurrent: boolean;

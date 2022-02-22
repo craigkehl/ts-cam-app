@@ -5,8 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import configurePresetStore from './store/presets-store';
+import configurePtzStore from './store/ptz-store';
 
 configurePresetStore();
+configurePtzStore();
 
 ReactDOM.render(
   <BrowserRouter>
