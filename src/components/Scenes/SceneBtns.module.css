@@ -1,5 +1,6 @@
 .topDiv {
   display: flex;
+  margin: 0 auto;
   justify-content: space-between;
   align-items: stretch;
   width: calc(100vw - 10px);
@@ -18,34 +19,34 @@
   align-items: stretch;
   width: 100%;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .btn {
-  padding: .5rem;
+  width: 33%;
+  padding: 0.5rem;
   border: 1px solid #005d8b;
   background: #005d8b;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
 }
-
 
 @media screen and (max-width: 450px) {
   .topDiv {
     justify-items: stretch;
   }
 
-  .btnGrp {    
+  .btnGrp {
     width: 100%;
     margin: 0 16px 0 0;
   }
 
   .btn {
-    padding: .5rem 0;
+    padding: 0.5rem 0;
   }
 }
 
 @media screen and (max-width: 320px) {
-    .title {
-      display: none;
-    }
-
+  .title {
+    display: none;
+  }
 }
