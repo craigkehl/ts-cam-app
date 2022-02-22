@@ -21,7 +21,7 @@ const ConfigPtz: React.FC<{ className?: string }> = (props) => {
         type='range'
         min='.1'
         max='1'
-        step='0.1'
+        step='0.05'
         id='smoothing'
         value={ptzSettings.resolution.toString()}
         onChange={changeHandler}
