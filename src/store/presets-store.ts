@@ -1,6 +1,4 @@
-import { initStore } from './store';
-
-import { GlobalState } from './store';
+import { initStore, GlobalState } from './store';
 
 export interface PresetState {
   isCurrent: boolean;

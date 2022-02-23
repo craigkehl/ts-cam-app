@@ -1,41 +1,37 @@
 import React from 'react';
+
 import Button from '../UI/Button';
 import { recallScenes } from '../../util/http-requests';
-
+import { useStore } from '../../store/store';
+import { SceneState } from '../../store/scenes-store';
 import classes from './SceneBtns.module.css';
 
+const SceneBtns: React.FC<{ className?: string }> = (props) => {
+  const state = useStore()[0];
+  const scenes = state.scenes;
 
-const SceneBtns: React.FC<{ className?: string, }> = (props) => {
-  const recallSceneHandler: (scene: string) => void = (scene) => {
+  const recallSceneHandler = (scene: string) => {
     recallScenes(scene);
   };
+
+  const sceneList = (
+    <div className={`${classes.btnGrp} ${props.className}`}>
+      {scenes.map((scene: SceneState) => (
+        <Button
+          className={`${classes.btn} ${props.className}`}
+          key={scene.name}
+          onClick={() => recallSceneHandler(scene.name)}
+        >
+          {scene.name}
+        </Button>
+      ))}
+    </div>
+  );
 
   return (
     <div className={classes.topDiv}>
       <h5 className={`${classes.title} ${props.className}`}>Zoom Source</h5>
-      <div className={classes.btnGrp}>
-        <Button
-          className={`${classes.btn} ${props.className}`}
-          key='1'
-          onClick={() => recallSceneHandler('Live')}
-        >
-          Live Cam
-        </Button>
-        <Button
-          className={`${classes.btn} ${props.className}`}
-          key='2'
-          onClick={() => recallSceneHandler('sacramentPic')}
-        >
-          Christ's Picture
-        </Button>
-        <Button
-          className={`${classes.btn} ${props.className}`}
-          key='3'
-          onClick={() => recallSceneHandler('sacramentVideo')}
-        >
-          Video
-        </Button>
-      </div>
+      {sceneList}
     </div>
   );
 };
