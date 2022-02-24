@@ -104,7 +104,12 @@ const DoubleSlider: React.FC<{
     };
   }, [touchEndHandler, touchHandler]);
 
-  return <div id='dblSlider' className={classes.dblSlider} />;
+  return (
+    <>
+      <h3>Pan and Tilt</h3>
+      <div id='dblSlider' className={classes.dblSlider} />
+    </>
+  );
 };
 
 export default DoubleSlider;

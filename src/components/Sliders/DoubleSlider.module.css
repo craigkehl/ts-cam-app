@@ -1,8 +1,8 @@
 .dblSlider {
-  width: calc(100% - 24px);
-  height: calc(80vw - 24px);
-  max-width: 28rem;
-  max-height: 22.4rem;
+  width: calc(100% - 16px);
+  height: calc(80vw - 16px);
+  /* max-width: 28rem;
+  max-height: 22.4rem; */
   margin: 0 auto 1rem auto;
   background-image: radial-gradient(#ca9ebb, #8b005d);
   border: 2px solid black;
@@ -10,26 +10,24 @@
   position: relative;
 }
 
-
 .dblSlider:before {
-    background: #8b005d;
-    content: '';
-    height: 100%;
-    position: absolute;
-    width: 5px;
-    left: 50%;
-    top: 0px;
+  background: #8b005d;
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 5px;
+  left: 50%;
+  top: 0px;
 }
 .dblSlider:after {
   background: #8b005d;
-    content: "";
-    height: 5px;
-    left: 0%;
-    position: absolute;
-    top: 50%;
-    width: 100%;
+  content: '';
+  height: 5px;
+  left: 0%;
+  position: absolute;
+  top: 50%;
+  width: 100%;
 }
-
 
 .wrapFlex {
   width: 100%;

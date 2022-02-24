@@ -110,19 +110,19 @@ const configureStore = () => {
       {
         id: 12,
         name: 'Right Wide',
-        isShow: true,
+        isShow: false,
         isCurrent: false,
       },
       {
         id: 13,
         name: 'Left Low',
-        isShow: true,
+        isShow: false,
         isCurrent: false,
       },
       {
         id: 14,
         name: 'Right Low',
-        isShow: true,
+        isShow: false,
         isCurrent: false,
       },
     ],

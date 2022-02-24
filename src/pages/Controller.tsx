@@ -7,14 +7,12 @@ import Card from '../components/UI/Card';
 import { useStore } from '../store/store';
 import classes from './Controller.module.css';
 
-const Controller: React.FC<{ className?: string; }> = (props) => {
-  const globalState = useStore()[ 0 ];
+const Controller: React.FC<{ className?: string }> = (props) => {
+  const globalState = useStore()[0];
   console.log(globalState);
   return (
     <>
-      <Card className={`${classes} ${props.className}`}>
-        <SceneBtns />
-      </Card>
+      <SceneBtns />
       <PresetBtnGrp action='recallPreset' />
       <Card className={`${classes} ${props.className}`}>
         <Slider className={`${classes} ${props.className}`} />

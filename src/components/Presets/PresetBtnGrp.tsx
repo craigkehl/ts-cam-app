@@ -7,7 +7,11 @@ import Preset from './Preset';
 import { recallPreset } from '../../util/http-requests';
 import classes from './PresetBtnGrp.module.css';
 
-const PresetBtnGrp: React.FC<{ action?: string; list?: string }> = (props) => {
+const PresetBtnGrp: React.FC<{
+  className?: string;
+  action?: string;
+  list?: string;
+}> = (props) => {
   const [state, dispatch] = useStore();
   const presets: PresetState[] = state.presets;
 
@@ -28,57 +32,63 @@ const PresetBtnGrp: React.FC<{ action?: string; list?: string }> = (props) => {
   };
 
   const presetList = (
-    <div className={classes.btnGrp}>
-      {presets.length > 0 ? (
-        presets.map(
-          (preset: PresetState) =>
-            preset.isShow && (
-              <Preset
-                className={`${classes.btn} `}
-                key={preset.id}
-                id={preset.id}
-                name={preset.name}
-                isShow={preset.isShow}
-                isCurrent={preset.isCurrent}
-                onRecallPreset={() => recallPresetHandler(preset.id)}
-              >
-                {preset.name}
-              </Preset>
-            )
-        )
-      ) : (
-        <p>No presets found.</p>
-      )}
-    </div>
+    <>
+      <h3>Preset Positions</h3>
+      <div className={classes.btnGrp}>
+        {presets.length > 0 ? (
+          presets.map(
+            (preset: PresetState) =>
+              preset.isShow && (
+                <Preset
+                  className={`${classes.btn} `}
+                  key={preset.id}
+                  id={preset.id}
+                  name={preset.name}
+                  isShow={preset.isShow}
+                  isCurrent={preset.isCurrent}
+                  onRecallPreset={() => recallPresetHandler(preset.id)}
+                >
+                  {preset.name}
+                </Preset>
+              )
+          )
+        ) : (
+          <p>No presets found.</p>
+        )}
+      </div>
+    </>
   );
 
   const hiddenPresetList = (
-    <div className={classes.btnGrp}>
-      {presets.length > 0 ? (
-        presets.map(
-          (preset: PresetState) =>
-            !preset.isShow && (
-              <Preset
-                className={`${classes.btn} `}
-                key={preset.id}
-                id={preset.id}
-                name={preset.name}
-                isShow={preset.isShow}
-                isCurrent={preset.isCurrent}
-                onRecallPreset={() => recallPresetHandler(preset.id)}
-              >
-                {preset.name}
-              </Preset>
-            )
-        )
-      ) : (
-        <p>No presets found.</p>
-      )}
-    </div>
+    <>
+      <h3>Hidden Presets</h3>
+      <div className={classes.btnGrp}>
+        {presets.length > 0 ? (
+          presets.map(
+            (preset: PresetState) =>
+              !preset.isShow && (
+                <Preset
+                  className={`${classes.btn} `}
+                  key={preset.id}
+                  id={preset.id}
+                  name={preset.name}
+                  isShow={preset.isShow}
+                  isCurrent={preset.isCurrent}
+                  onRecallPreset={() => recallPresetHandler(preset.id)}
+                >
+                  {preset.name}
+                </Preset>
+              )
+          )
+        ) : (
+          <p>No presets found.</p>
+        )}
+      </div>
+    </>
   );
 
   return (
-    <Card className={classes.card}>
+    <Card className={`${classes.card ? classes.card : ''} ${props.className}`}>
       {!showHiddenList && presetList}
       {showHiddenList && hiddenPresetList}
     </Card>
