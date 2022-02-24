@@ -1,37 +1,68 @@
 import React from 'react';
 
 import Card from '../UI/Card';
-import Button from '../UI/Button';
-import { recallScenes } from '../../util/http-requests';
+import Scene from './Scene';
 import { useStore } from '../../store/store';
 import { SceneState } from '../../store/scenes-store';
+import { recallScenes } from '../../util/http-requests';
 import classes from './SceneBtns.module.css';
 
-const SceneBtns: React.FC<{ className?: string }> = (props) => {
-  const state = useStore()[0];
-  const scenes = state.scenes;
+const SceneBtns: React.FC<{
+  className?: string;
+  action?: string;
+  list?: string;
+}> = (props) => {
+  const [state, dispatch] = useStore();
+  const scenes: SceneState[] = state.scenes;
 
-  const recallSceneHandler = (scene: string) => {
-    recallScenes(scene);
+  let showHiddenList = props.list === 'showHidden' ? true : false;
+
+  const onClickHandler = (name: string) => {
+    switch (props.action) {
+      case 'recallScene':
+        recallScenes(name);
+        dispatch('CURRENT_SCENE', name);
+        break;
+      case 'toggleShow':
+        dispatch('TOGGLE_SHOW_SCENE', name);
+        break;
+      default:
+        return;
+    }
   };
 
   const sceneList = (
-    <div className={`${classes.btnGrp} ${props.className}`}>
-      {scenes.map((scene: SceneState) => (
-        <Button
-          className={`${classes.btn} ${props.className}`}
-          key={scene.name}
-          onClick={() => recallSceneHandler(scene.name)}
-        >
-          {scene.name}
-        </Button>
-      ))}
-    </div>
+    <>
+      <h3 className={`${classes.title} ${props.className}`}>
+        {showHiddenList ? 'Hidden ' : 'Current '} Scenes
+      </h3>
+      <div className={`${classes.btnGrp} ${props.className}`}>
+        {scenes.length > 0 ? (
+          scenes.map(
+            (scene: SceneState) =>
+              (showHiddenList ? !scene.isShow : scene.isShow) && (
+                <Scene
+                  className={`${classes.btn} ${props.className}`}
+                  key={scene.name}
+                  name={scene.name}
+                  description={scene.description}
+                  isShow={scene.isShow}
+                  isCurrent={scene.isCurrent}
+                  onClick={() => onClickHandler(scene.name)}
+                >
+                  {scene.name}
+                </Scene>
+              )
+          )
+        ) : (
+          <p>No scenes found.</p>
+        )}
+      </div>
+    </>
   );
 
   return (
-    <Card>
-      <h3 className={`${classes.title} ${props.className}`}>Current Scenes</h3>
+    <Card className={`${classes.card ? classes.card : ''} ${props.className}`}>
       {sceneList}
     </Card>
   );

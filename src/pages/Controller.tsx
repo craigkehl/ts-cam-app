@@ -9,10 +9,10 @@ import classes from './Controller.module.css';
 
 const Controller: React.FC<{ className?: string }> = (props) => {
   const globalState = useStore()[0];
-  console.log(globalState);
+
   return (
     <>
-      <SceneBtns />
+      <SceneBtns action='recallScene' />
       <PresetBtnGrp action='recallPreset' />
       <Card className={`${classes} ${props.className}`}>
         <Slider className={`${classes} ${props.className}`} />

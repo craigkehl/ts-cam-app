@@ -21,6 +21,13 @@ const configureStore = () => {
       };
       return { scenes: updatedScenes };
     },
+    CURRENT_SCENE: (curState: GlobalState, name: string) => {
+      const updatedScenes = curState.scenes.map((s: SceneState): SceneState => {
+        s.isCurrent = name === s.name ? true : false;
+        return s;
+      });
+      return { scenes: updatedScenes };
+    },
     ADD_SCENE: (
       curState: GlobalState,
       newScene: {

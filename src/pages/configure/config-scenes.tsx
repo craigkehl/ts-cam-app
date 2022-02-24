@@ -7,7 +7,8 @@ const ConfigScenes: React.FC<{ className?: string }> = (props) => {
   return (
     <>
       <h1>Configure Scenes</h1>
-      <SceneBtns />
+      <SceneBtns action='toggleShow' />
+      <SceneBtns action='toggleShow' list='showHidden' />
       <AddScene />
     </>
   );
