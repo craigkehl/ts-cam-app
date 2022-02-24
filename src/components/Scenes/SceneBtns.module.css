@@ -1,13 +1,3 @@
-/* .topDiv {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  justify-content: space-between;
-  align-items: stretch;
-  width: calc(100vw - 10px);
-  max-width: 28rem;
-} */
-
 .title {
   display: inline;
   padding: 0.5rem;
@@ -16,39 +6,30 @@
 }
 
 .btnGrp {
-  display: flex;
-  flex-wrap: wrap;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
-  overflow: hidden;
-  margin: 0;
-  width: 100%;
+  margin: 0 auto;
 }
 
 .btn {
-  width: 30%;
-  padding: 0.5rem;
   border: 1px solid #005d8b;
   background: #005d8b;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
 }
 
-@media screen and (max-width: 450px) {
-  /* .topDiv {
-    justify-items: stretch;
-  } */
-
-  /* .btnGrp {
-    width: 100%;
-    margin: 0 16px 0 0;
-  } */
-
-  .btn {
-    padding: 0.5rem 0;
+@media screen and (max-width: 300px) {
+  .btnGrp {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media screen and (max-width: 320px) {
-  .title {
-    display: none;
+@media screen and (min-width: 520px) {
+  .btnGrp {
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4);
   }
 }

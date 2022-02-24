@@ -1,7 +1,7 @@
 import React from 'react';
 import PresetBtnGrp from '../../components/Presets/PresetBtnGrp';
 
-const ConfigController: React.FC<{ className?: string }> = (props) => {
+const ConfigPrests: React.FC<{ className?: string }> = (props) => {
   return (
     <>
       <h1>Configure Presets</h1>
@@ -11,4 +11,4 @@ const ConfigController: React.FC<{ className?: string }> = (props) => {
   );
 };
 
-export default ConfigController;
+export default ConfigPrests;

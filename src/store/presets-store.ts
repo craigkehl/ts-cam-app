@@ -9,7 +9,7 @@ export interface PresetState {
 
 const configureStore = () => {
   const actions = {
-    TOGGLE_SHOW: (curState: GlobalState, presetId: number) => {
+    TOGGLE_SHOW_PRESET: (curState: GlobalState, presetId: number) => {
       const presetIndex: number = curState.presets.findIndex(
         (p: PresetState) => p.id === presetId
       );
@@ -25,7 +25,6 @@ const configureStore = () => {
       const updatedPresets = curState.presets.map(
         (p: PresetState): PresetState => {
           p.isCurrent = presetId === p.id ? true : false;
-          console.log(p);
           return p;
         }
       );
