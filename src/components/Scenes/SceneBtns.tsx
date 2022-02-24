@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Card from '../UI/Card';
 import Button from '../UI/Button';
 import { recallScenes } from '../../util/http-requests';
 import { useStore } from '../../store/store';
@@ -29,10 +30,10 @@ const SceneBtns: React.FC<{ className?: string }> = (props) => {
   );
 
   return (
-    <div className={classes.topDiv}>
-      <h5 className={`${classes.title} ${props.className}`}>Zoom Source</h5>
+    <Card>
+      <h3 className={`${classes.title} ${props.className}`}>Current Scenes</h3>
       {sceneList}
-    </div>
+    </Card>
   );
 };
 

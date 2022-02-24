@@ -4,11 +4,12 @@ export interface SceneState {
   name: string;
   isShow: boolean;
   description: string;
+  isCurrent: boolean;
 }
 
 const configureStore = () => {
   const actions = {
-    TOGGLE_SHOW: (curState: GlobalState, name: string) => {
+    TOGGLE_SHOW_SCENE: (curState: GlobalState, name: string) => {
       const sceneIndex: number = curState.scenes.findIndex(
         (s: SceneState) => s.name === name
       );
@@ -22,11 +23,13 @@ const configureStore = () => {
     },
     ADD_SCENE: (
       curState: GlobalState,
-      name: string,
-      description: string,
-      isShow: boolean
+      newScene: {
+        name: string;
+        description: string;
+        isShow: boolean;
+        isCurrent: boolean;
+      }
     ) => {
-      const newScene = { name, description, isShow };
       curState.scenes.push(newScene);
     },
   };
@@ -37,16 +40,37 @@ const configureStore = () => {
         name: 'Live',
         isShow: true,
         description: 'Live camera feed',
+        isCurrent: false,
       },
       {
-        name: 'sacramentPic',
+        name: 'Sacrament Graphic',
         isShow: true,
         description: 'Picture of Christ with Sacrament background music',
+        isCurrent: false,
       },
       {
-        name: 'sacramentVideo',
+        name: 'Sacrament Video',
         isShow: true,
         description: "Video of Christ's Atonement",
+        isCurrent: false,
+      },
+      {
+        name: 'Computer',
+        isShow: false,
+        description: "Feed from presentor's computer",
+        isCurrent: false,
+      },
+      {
+        name: 'Computer w/speaker',
+        isShow: false,
+        description: 'Computer Feed with a small speaker window',
+        isCurrent: false,
+      },
+      {
+        name: 'Speaker w/computer',
+        isShow: false,
+        description: 'Speaker with a small computer feed window',
+        isCurrent: false,
       },
     ],
   });
