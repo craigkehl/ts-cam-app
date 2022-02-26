@@ -7,7 +7,7 @@ import Card from '../UI/Card';
 
 import classes from './AddScene.module.css';
 
-const ConfigScenes: React.FC<{ className?: string }> = (props) => {
+const AddScene: React.FC<{ className?: string }> = (props) => {
   const [globalState, dispatch] = useStore();
   const nameInputRef = useRef<HTMLInputElement>(null);
   const descInputRef = useRef<HTMLInputElement>(null);
@@ -64,4 +64,4 @@ const ConfigScenes: React.FC<{ className?: string }> = (props) => {
   );
 };
 
-export default ConfigScenes;
+export default AddScene;

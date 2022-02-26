@@ -19,7 +19,7 @@ const Controller: React.FC<{ className?: string }> = (props) => {
         <DoubleSlider
           className={`${classes} ${props.className}`}
           xMax='24'
-          yMax='20'
+          yMax='24'
           resolution={globalState.ptzSettings.resolution}
         />
       </Card>

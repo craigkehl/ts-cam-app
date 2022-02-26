@@ -4,10 +4,10 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './layouts/drawer';
 import Welcome from './pages/Welcome';
 import Controller from './pages/Controller';
-import ConfigScenes from './pages/configure/config-scenes';
-import ConfigPresets from './pages/configure/config-presets';
-import ConfigPTZ from './pages/configure/config-ptz';
-import ConfigExtras from './pages/configure/config-extras';
+import ConfigScenes from './pages/configure/Config-scenes';
+import ConfigPresets from './pages/configure/Config-presets';
+import ConfigPTZ from './pages/configure/Config-ptz';
+import ConfigExtras from './pages/configure/Config-extras';
 import Profile from './pages/Profile';
 
 const App: React.FC<{ className?: string }> = (props) => {
