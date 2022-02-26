@@ -16,6 +16,24 @@ export const recallPreset = async (presetId: string) => {
   }
 };
 
+export const setPreset = async (presetId: string) => {
+  const data = JSON.stringify({ presetId });
+  try {
+    const response = await fetch(`${BASEURL}/preset`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: data,
+    });
+    if (!response.ok) {
+      throw new Error('Preset not executed!');
+    } else {
+      return true;
+    }
+  } catch (error) {
+    console.log('Error: ' + error);
+  }
+};
+
 export const zoom = async (speed: number) => {
   console.log(`${BASEURL}/zoom/${speed.toString()}`);
   try {

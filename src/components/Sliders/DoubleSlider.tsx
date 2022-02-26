@@ -2,9 +2,14 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { move } from '../../util/http-requests';
 import classes from './DoubleSlider.module.css';
 
-const DoubleSlider: React.FC<{ className: string; xMax: string; yMax: string; resolution?: string; }> = (props) => {
-  const [ rate, setRate ] = useState(() => {
-    const resolution = (props.resolution) ? parseInt(props.resolution) : .5;
+const DoubleSlider: React.FC<{
+  className: string;
+  xMax: string;
+  yMax: string;
+  resolution: number;
+}> = (props) => {
+  const [rate, setRate] = useState(() => {
+    const resolution = props.resolution;
     const xMax = parseInt(props.xMax) * resolution;
     const yMax = parseInt(props.yMax) * resolution;
     return {
@@ -12,7 +17,7 @@ const DoubleSlider: React.FC<{ className: string; xMax: string; yMax: string; re
       y: 0,
       xMax,
       yMax,
-      resolution: resolution
+      resolution: resolution,
     };
   });
 
@@ -22,20 +27,20 @@ const DoubleSlider: React.FC<{ className: string; xMax: string; yMax: string; re
     // calculate touch input relative to target's center dimensions
     if (e.touches) {
       const inputX = Math.floor(
-        e.touches[ 0 ].pageX -
-        e.currentTarget.offsetLeft -
-        (e.currentTarget.offsetWidth / 2)
+        e.touches[0].pageX -
+          e.currentTarget.offsetLeft -
+          e.currentTarget.offsetWidth / 2
       );
       const inputY = Math.floor(
-        e.touches[ 0 ].pageY -
-        e.currentTarget.offsetTop -
-        e.currentTarget.offsetHeight / 2
+        e.touches[0].pageY -
+          e.currentTarget.offsetTop -
+          e.currentTarget.offsetHeight / 2
       );
 
       setRate((rate) => {
         // Get each rate steps size
-        const xDivSize = (e.currentTarget.offsetWidth / 2) / (rate.xMax);
-        const yDivSize = (e.currentTarget.offsetHeight / 2) / (rate.yMax);
+        const xDivSize = e.currentTarget.offsetWidth / 2 / rate.xMax;
+        const yDivSize = e.currentTarget.offsetHeight / 2 / rate.yMax;
 
         // Calc rate
         const xRate = Math.floor(inputX / xDivSize);
@@ -43,8 +48,8 @@ const DoubleSlider: React.FC<{ className: string; xMax: string; yMax: string; re
           xRate > rate.xMax
             ? rate.xMax
             : xRate < rate.xMax * -1
-              ? rate.xMax * -1
-              : xRate;
+            ? rate.xMax * -1
+            : xRate;
 
         // Limit rate to max, add negative to lower & left rate
         const yRate = Math.floor(inputY / yDivSize);
@@ -52,8 +57,8 @@ const DoubleSlider: React.FC<{ className: string; xMax: string; yMax: string; re
           yRate > rate.yMax
             ? rate.yMax
             : yRate < rate.yMax * -1
-              ? rate.yMax * -1
-              : yRate;
+            ? rate.yMax * -1
+            : yRate;
 
         if (rate.x !== xRateChecked || rate.y !== yRateChecked) {
           return {
@@ -61,7 +66,7 @@ const DoubleSlider: React.FC<{ className: string; xMax: string; yMax: string; re
             y: yRateChecked,
             xMax: rate.xMax,
             yMax: rate.yMax,
-            resolution: rate.resolution
+            resolution: rate.resolution,
           };
         }
         return rate;
@@ -84,7 +89,7 @@ const DoubleSlider: React.FC<{ className: string; xMax: string; yMax: string; re
       Math.floor(rate.x / rate.resolution).toString(),
       Math.floor(rate.y / rate.resolution).toString()
     );
-  }, [ rate ]);
+  }, [rate]);
 
   useEffect(() => {
     const elem = document.getElementById('dblSlider')!;
@@ -97,9 +102,14 @@ const DoubleSlider: React.FC<{ className: string; xMax: string; yMax: string; re
       elem.removeEventListener('touchmove', touchHandler);
       elem.removeEventListener('touchend', touchEndHandler);
     };
-  }, [ touchEndHandler, touchHandler ]);
+  }, [touchEndHandler, touchHandler]);
 
-  return <div id='dblSlider' className={classes.dblSlider} />;
+  return (
+    <>
+      <h3>Pan and Tilt</h3>
+      <div id='dblSlider' className={classes.dblSlider} />
+    </>
+  );
 };
 
 export default DoubleSlider;

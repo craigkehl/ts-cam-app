@@ -1,18 +1,34 @@
 import React from 'react';
-import PresetBtnGrp from '../../components/Presets/PresetBtnGrp';
 
-const ConfigController: React.FC<{ className?: string }> = (props) => {
+import PresetBtnGrp from '../../components/Presets/PresetBtnGrp';
+import AddPreset from '../../components/Presets/AddPreset';
+import Card from '../../components/UI/Card';
+import Zoom from '../../components/Sliders/Slider';
+import PtzPad from '../../components/Sliders/DoubleSlider';
+
+import { useStore } from '../../store/store';
+import classes from './Config-presets.module.css';
+
+const ConfigPrests: React.FC<{ className?: string }> = (props) => {
+  const globalState = useStore()[0];
+
   return (
     <>
       <h1>Configure Presets</h1>
-      <h2 className='inline'>Visible</h2>
-      <h4 className='inline'>Click a preset to hide it</h4>
       <PresetBtnGrp action='toggleShow' />
-      <h2 className='inline'>Hidden</h2>
-      <h4 className='inline'>Click a preset to restore it</h4>
       <PresetBtnGrp action='toggleShow' list='showHidden' />
+      <AddPreset />
+      <Card>
+        <Zoom className={`${classes} ${props.className}`} />
+        <PtzPad
+          className={`${classes} ${props.className}`}
+          xMax='24'
+          yMax='24'
+          resolution={globalState.ptzSettings.resolution}
+        />
+      </Card>
     </>
   );
 };
 
-export default ConfigController;
+export default ConfigPrests;

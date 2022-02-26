@@ -1,27 +1,22 @@
 .btnGrp {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
   grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
-  /* max-width: 28rem; */
   margin: 0 auto;
-  display: -ms-grid;
-  -ms-grid-columns: repeat(3, 1fr);
 }
-
-/* .button {
-  width: 100%;
-  max-width: 27%;
-  flex: 1 1 27%;
-} */
 
 @media screen and (max-width: 300px) {
   .btnGrp {
+    -ms-grid-columns: 1fr 1fr;
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media screen and (min-width: 520px) {
   .btnGrp {
-    grid-template-columns: repeat(4, 1fr);
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4);
   }
 }

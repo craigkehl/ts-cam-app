@@ -2,8 +2,8 @@
   position: relative;
   font: inherit;
   text-align: center;
-  padding: 0.25rem 3px;
-  margin: 0.25rem;
+  padding: 10px 3px;
+  margin: 4px;
   border: 1px solid #8b005d;
   color: white;
   background: #8b005d;
@@ -15,7 +15,7 @@
 .button::before {
   content: '';
   float: left;
-  padding-top: 45%;
+  padding-top: 25%;
 }
 
 .button:focus {

@@ -1,8 +1,7 @@
-import { initStore } from './store';
+import { initStore, GlobalState } from './store';
 
-export interface GlobalState {
-  [x: string]: any | undefined;
-}
+import { findSmallestMissing } from '../util/helpers';
+import { setPreset } from '../util/http-requests';
 
 export interface PresetState {
   isCurrent: boolean;
@@ -13,7 +12,7 @@ export interface PresetState {
 
 const configureStore = () => {
   const actions = {
-    TOGGLE_SHOW: (curState: GlobalState, presetId: number) => {
+    TOGGLE_SHOW_PRESET: (curState: GlobalState, presetId: number) => {
       const presetIndex: number = curState.presets.findIndex(
         (p: PresetState) => p.id === presetId
       );
@@ -29,11 +28,27 @@ const configureStore = () => {
       const updatedPresets = curState.presets.map(
         (p: PresetState): PresetState => {
           p.isCurrent = presetId === p.id ? true : false;
-          console.log(p);
           return p;
         }
       );
       return { presets: updatedPresets };
+    },
+    ADD_PRESET: (curState: GlobalState, name: string) => {
+      const usedIds: number[] = [];
+      curState.presets.forEach((preset: PresetState) =>
+        usedIds.push(preset.id)
+      );
+
+      const newId: number = findSmallestMissing(usedIds);
+      setPreset(newId.toString());
+
+      const newPreset: PresetState = {
+        name,
+        isShow: false,
+        isCurrent: false,
+        id: newId,
+      };
+      curState.presets.push(newPreset);
     },
   };
 
@@ -114,19 +129,19 @@ const configureStore = () => {
       {
         id: 12,
         name: 'Right Wide',
-        isShow: true,
+        isShow: false,
         isCurrent: false,
       },
       {
         id: 13,
         name: 'Left Low',
-        isShow: true,
+        isShow: false,
         isCurrent: false,
       },
       {
         id: 14,
         name: 'Right Low',
-        isShow: true,
+        isShow: false,
         isCurrent: false,
       },
     ],

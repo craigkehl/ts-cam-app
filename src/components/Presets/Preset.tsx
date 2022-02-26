@@ -13,8 +13,6 @@ interface PresetProps extends React.PropsWithChildren<object> {
 }
 
 const Preset = React.memo((props: PresetProps) => {
-  // const dispatch = useStore(false)[1];
-
   const recallPresetHandler = (id: number) => {
     props.onRecallPreset(id);
   };
