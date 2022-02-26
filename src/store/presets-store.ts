@@ -1,5 +1,8 @@
 import { initStore, GlobalState } from './store';
 
+import { findSmallestMissing } from '../util/helpers';
+import { setPreset } from '../util/http-requests';
+
 export interface PresetState {
   isCurrent: boolean;
   id: number;
@@ -29,6 +32,23 @@ const configureStore = () => {
         }
       );
       return { presets: updatedPresets };
+    },
+    ADD_PRESET: (curState: GlobalState, name: string) => {
+      const usedIds: number[] = [];
+      curState.presets.forEach((preset: PresetState) =>
+        usedIds.push(preset.id)
+      );
+
+      const newId: number = findSmallestMissing(usedIds);
+      setPreset(newId.toString());
+
+      const newPreset: PresetState = {
+        name,
+        isShow: false,
+        isCurrent: false,
+        id: newId,
+      };
+      curState.presets.push(newPreset);
     },
   };
 
