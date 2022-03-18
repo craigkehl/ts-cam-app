@@ -2,12 +2,14 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { move } from '../../util/http-requests';
 import classes from './DoubleSlider.module.css';
 
-const DoubleSlider: React.FC<{
+interface DoubleSliderProps {
   className: string;
   xMax: string;
   yMax: string;
   resolution: number;
-}> = (props) => {
+}
+
+const DoubleSlider: React.FC<DoubleSliderProps> = (props) => {
   const [rate, setRate] = useState(() => {
     const resolution = props.resolution;
     const xMax = parseInt(props.xMax) * resolution;
@@ -37,47 +39,45 @@ const DoubleSlider: React.FC<{
           e.currentTarget.offsetHeight / 2
       );
 
-      setRate((rate) => {
+      setRate((prevRate) => {
         // Get each rate steps size
-        const xDivSize = e.currentTarget.offsetWidth / 2 / rate.xMax;
-        const yDivSize = e.currentTarget.offsetHeight / 2 / rate.yMax;
+        const xDivSize = e.currentTarget.offsetWidth / 2 / prevRate.xMax;
+        const yDivSize = e.currentTarget.offsetHeight / 2 / prevRate.yMax;
 
         // Calc rate
         const xRate = Math.floor(inputX / xDivSize);
         const xRateChecked =
-          xRate > rate.xMax
-            ? rate.xMax
-            : xRate < rate.xMax * -1
-            ? rate.xMax * -1
+          xRate > prevRate.xMax
+            ? prevRate.xMax
+            : xRate < prevRate.xMax * -1
+            ? prevRate.xMax * -1
             : xRate;
 
         // Limit rate to max, add negative to lower & left rate
         const yRate = Math.floor(inputY / yDivSize);
         const yRateChecked =
-          yRate > rate.yMax
-            ? rate.yMax
-            : yRate < rate.yMax * -1
-            ? rate.yMax * -1
+          yRate > prevRate.yMax
+            ? prevRate.yMax
+            : yRate < prevRate.yMax * -1
+            ? prevRate.yMax * -1
             : yRate;
 
-        if (rate.x !== xRateChecked || rate.y !== yRateChecked) {
+        if (prevRate.x !== xRateChecked || prevRate.y !== yRateChecked) {
           return {
+            ...prevRate,
             x: xRateChecked,
             y: yRateChecked,
-            xMax: rate.xMax,
-            yMax: rate.yMax,
-            resolution: rate.resolution,
           };
         }
-        return rate;
+        return prevRate;
       });
     }
   }, []);
 
   const touchEndHandler = useCallback(() => {
-    setRate((rate) => {
+    setRate((prevRate) => {
       return {
-        ...rate,
+        ...prevRate,
         x: 0,
         y: 0,
       };
