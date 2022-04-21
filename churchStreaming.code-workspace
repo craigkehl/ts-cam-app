@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "name": "CamCtrlServer",
+      "path": "../CamCtrlServer"
+    },
+    {
+      "path": "../updated/ts-cam-appv1.01"
+    }
+  ],
+  "settings": {}
+}
