@@ -24,7 +24,7 @@ const Slider: React.FC<{ className: string }> = (props) => {
         className={`${classes.title} ${props.className}`}
         htmlFor='zoomSlider'
       >
-        Zoom - {curValue.toString()}
+        Zoom speed: {curValue.toString()}
       </label>
       <input
         className={classes.slider}
