@@ -7,16 +7,19 @@ import Card from '../components/UI/Card';
 import { useStore } from '../store/store';
 import classes from './Controller.module.css';
 
-const Controller: React.FC<{ className?: string }> = (props) => {
+const Controller: React.FC<{ className?: string }> = props => {
   const globalState = useStore()[0];
 
   return (
-    <>
-      <SceneBtns action='recallScene' />
-      <Card>
+    <div className={`${classes['controller-page']} ${props.className}`}>
+      <SceneBtns
+        className={`${classes['scene-btns']} ${props.className}`}
+        action='recallScene'
+      />
+      <Card className={`${classes['preset-btns']} ${props.className}`}>
         <PresetBtnGrp action='recallPreset' />
       </Card>
-      <Card className={`${classes} ${props.className}`}>
+      <Card className={`${classes['pan-tilt-btns']} ${props.className}`}>
         <Slider className={`${classes} ${props.className}`} />
         <DoubleSlider
           className={`${classes} ${props.className}`}
@@ -25,7 +28,7 @@ const Controller: React.FC<{ className?: string }> = (props) => {
           resolution={globalState.ptzSettings.resolution}
         />
       </Card>
-    </>
+    </div>
   );
 };
 
