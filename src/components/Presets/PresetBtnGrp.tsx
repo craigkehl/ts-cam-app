@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Card from '../UI/Card';
 import { useStore } from '../../store/store';
 import { PresetState } from '../../store/presets-store';
 import Preset from './Preset';
@@ -34,7 +33,7 @@ const PresetBtnGrp: React.FC<{
   const presetList = (
     <>
       <h3 className={`${classes.title} ${props.className}`}>
-        {showHiddenList ? 'Hidden ' : 'Current '} Presets
+        {showHiddenList ? 'Hidden ' : ''} Presets
       </h3>
       <div className={`${classes.btnGrp} ${props.className}`}>
         {presets.length > 0 ? (
@@ -42,7 +41,9 @@ const PresetBtnGrp: React.FC<{
             (preset: PresetState) =>
               (showHiddenList ? !preset.isShow : preset.isShow) && (
                 <Preset
-                  className={`${classes.btn} `}
+                  className={`${classes.btn}  ${
+                    classes[showHiddenList ? 'hidden' : '']
+                  }`}
                   key={preset.id}
                   id={preset.id}
                   name={preset.name}
@@ -61,11 +62,7 @@ const PresetBtnGrp: React.FC<{
     </>
   );
 
-  return (
-    <Card className={`${classes.card ? classes.card : ''} ${props.className}`}>
-      {presetList}
-    </Card>
-  );
+  return <>{presetList}</>;
 };
 
 export default PresetBtnGrp;
