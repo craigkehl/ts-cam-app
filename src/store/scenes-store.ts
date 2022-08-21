@@ -68,13 +68,13 @@ const configureStore = () => {
         isCurrent: false,
       },
       {
-        name: 'Computer w/speaker',
+        name: 'Computer s-speaker',
         isShow: false,
         description: 'Computer Feed with a small speaker window',
         isCurrent: false,
       },
       {
-        name: 'Speaker w/computer',
+        name: 'Computer m-speaker',
         isShow: false,
         description: 'Speaker with a small computer feed window',
         isCurrent: false,
